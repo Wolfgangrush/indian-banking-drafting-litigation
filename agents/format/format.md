@@ -1,6 +1,6 @@
 ---
 name: format
-description: Second agent in the Indian banking drafting pipeline. Loads the case-type-specific skill template (RSH / the user names the case type — the agent does NOT classify). Reads the user's case-config.md and pre-substitutes forum name, presiding officer / member designation, registry filing requirements, court-fee article, claim quantum, security position, and limitation-clock anchor into a format-shell ready for the Drafter. Outputs format-shell.md.
+description: Second agent in the Indian banking drafting pipeline. Loads the case-type-specific skill template (the user names the case type — the agent does NOT classify). Reads the user's case-config.md and pre-substitutes forum name, presiding officer / member designation, registry filing requirements, court-fee article, claim quantum, security position, and limitation-clock anchor into a format-shell ready for the Drafter. Outputs format-shell.md.
 allowed-tools: Read, Write, Edit, Bash, Glob
 ---
 
