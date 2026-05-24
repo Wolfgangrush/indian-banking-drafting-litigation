@@ -1,0 +1,52 @@
+description = "Run the full 6-agent Indian Banking and Financial Litigation Drafting pipeline on a case folder."
+
+prompt = """
+# Full Pipeline — Indian Banking and Financial Litigation Drafting (Gemini CLI)
+
+Run the complete 6-agent drafting pipeline on a case folder. Sequential execution: each stage's output is the next stage's input.
+
+## User-supplied case folder
+
+```
+{{args}}
+```
+
+If empty, ask: "Which case folder? (provide path)"
+
+## Pipeline
+
+| Stage | Agent | Input | Output |
+|-------|-------|-------|--------|
+| 1 | Reader | case folder + laws/ subfolder | case-facts.md |
+| 2 | Format | case-facts.md + case-config.md | format-shell.md |
+| 3 | Drafter | case-facts.md + format-shell.md | draft-v1.docx |
+| 4 | Verifier | draft-v1.docx + case-facts.md | verification-report.md |
+| 5 | Refiner | draft-v1.docx + verification-report.md | draft-v2.docx |
+| 6 | Overseer | draft-v2.docx (opposing-counsel lens) | opposing-notes.md + final-draft.docx |
+
+## Execution
+
+Run each stage by invoking the matching slash command in sequence. STOP conditions:
+- Reader: missing required law PDF → STOP, ask user to supply
+- Format: case-config.md missing or incomplete → STOP
+- Verifier: hallucinated dates / fabricated citations / orphan annexures detected → STOP, re-run Drafter with corrections
+- Overseer: attackable defect in prayer / contradictory facts / missing limb of argument → flag for user review
+
+## Forum / jurisdiction context
+
+**Forum:** Debts Recovery Tribunal bench / Debts Recovery Appellate Tribunal / National Company Law Tribunal bench / Chief Metropolitan Magistrate / District Magistrate / civil court for SARFAESI
+**Case types:** Original Application (OA) under RDB Act 1993 · SARFAESI Section 17 application · DRAT appeal · IBC Section 7 / 9 / 10 · Section 138 NI Act complaint · MSMED Act delayed payment · Section 14 SARFAESI possession application · Section 13(2) SARFAESI demand notice reply · Section 19 RDB Act counter-claim
+
+## Privacy posture
+
+- Gemini PAID tier for non-client work
+- Local Ollama for real client matters under BCI Rule 17
+- **Never Gemini free tier for client data** (prompts go to training)
+
+## Output discipline (every stage)
+
+- AI-drafted. Verify before filing.
+- Advocate retains full professional responsibility under Advocates Act 1961.
+- Every citation verified on SCC OnLine / Manupatra / IndianKanoon before inclusion.
+- Every statutory section verified pre/post 1 July 2024 (BNS / BNSS / BSA transition).
+"""
