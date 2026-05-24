@@ -63,3 +63,19 @@ Read the Refiner's polished `draft-v2.docx` with an opposing-counsel lens. Find 
 5. **Affidavit-in-support defects** — wrong Court / Tribunal name in the affidavit cause-title; wrong perjury reference (BSA 2023 vs IEA 1872).
 
 The Overseer reports each issue in `opposing-notes.md` with a paragraph reference and a suggested hardening edit, then applies the hardening to produce `final-draft.docx`. The advocate retains the right to accept or reject any hardening — the Overseer's role is to surface the attack surface, not to overrule the advocate's professional judgment.
+
+
+---
+
+## v0.2.3 EXPLICIT OUTPUT-PAIRING (load-bearing — Overseer MUST run after every `.md` write)
+
+After writing **opposing-notes + final-draft** to the case folder, the Overseer MUST immediately invoke the shipped output-pairing helper on each `.md` artifact to produce a paired `.docx`:
+
+```bash
+bash "${CLAUDE_PLUGIN_ROOT}/skills/_banking_drafting_base/pair_md_to_docx.sh" <case-folder>/opposing-notes.md
+bash "${CLAUDE_PLUGIN_ROOT}/skills/_banking_drafting_base/pair_md_to_docx.sh" <case-folder>/final-draft.md
+```
+
+The helper performs the two-step pandoc + `fix_docx_tables.py` pipeline using the shipped `reference.docx` at `${CLAUDE_PLUGIN_ROOT}/skills/_banking_drafting_base/reference.docx` and writes the paired `.docx` alongside the `.md`. The advocate then has both formats — `.md` for diffing / version control / downstream agent input, `.docx` for opening in Word.
+
+**Hard rule:** the Overseer does NOT signal the next stage of the pipeline until every `.md` it has written carries a paired `.docx`. The Verifier (or the human reviewer) checks for this pairing and flags any orphan `.md`. (Documented as v0.2.2 OUTPUT-PAIRING DISCIPLINE in `_drafting_common/SKILL.md`; v0.2.3 makes the invocation explicit in this agent's prompt so the rule survives any failure of inherited-rule compliance.)
