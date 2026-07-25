@@ -11,6 +11,19 @@
 </div>
 
 
+<div align="center">
+  <img src="docs/banner.png" width="820"/>
+  <p><strong>Draft Indian banking, debt-recovery, securitisation, cheque-dishonour, and insolvency pleadings — in Claude.</strong></p>
+  <p>Visit the live site: <a href="https://wolfgangrush.github.io">wolfgangrush.github.io</a></p>
+</div>
+
+<div align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"/></a>
+  <img src="https://img.shields.io/badge/Claude-compatible-8A2BE2" alt="Claude Compatible"/>
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome"/>
+</div>
+
+
 # indian-banking-drafting
 
 > **Open-source Claude-compatible plugin for drafting Indian banking, debt-recovery, securitisation, cheque-dishonour, and insolvency pleadings.**
